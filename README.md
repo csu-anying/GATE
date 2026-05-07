@@ -15,7 +15,7 @@ pip install requirement.txt
 
 # :partying_face:Abstract
 Electrocardiography (ECG) is a fundamental tool for diagnosing cardiovascular diseases, yet the scarcity of large-scale annotated data limits the applicability of supervised learning approaches. While self-supervised learning (SSL) has shown promise for ECG representation learning, existing methods often suffer from semantic distortion, insufficient spatial modeling, and a lack of integration with medical knowledge. To address these challenges, we propose GATE (Graph-And-Text Exchange), a novel multimodal SSL framework that enhances the quality of the representation of ECG through cross-modal exchange between graph-structured data and clinical ECG reports. GATE employs a spatiotemporal graph encoder to capture fine-grained intra- and inter-lead dependencies, and introduces a lexical knowledge-embedded codebook to enhance the semantic representation of clinical reports, facilitating effective graph-text alignment. During inference, GATE integrates a large language model with a domain-specific knowledge base to generate semantically enriched disease descriptions, enabling robust zero-shot classification. Extensive experiments on three real-world ECG datasets demonstrate that GATE outperforms state-of-the-art self-supervised and multimodal baselines under both low-resource and zero-shot settings. Notably, GATE achieves competitive performance even when trained on only 1\% of labeled data, highlighting its strong generalization and clinical potential. The code is available at [Alt](https://github.com/csu-anying/GATE/tree/main).
-![](https://github.com/csu-anying/GATE/tree/main/pic/GATE.png)
+![](https://github.com/csu-anying/GATE/blob/main/pic/GATE.png)
 
 # :triangular_flag_on_post:Dataset
 We use four datasets for our experiments, the MIMIC-IV dataset is used for model pre-training, while the other three datasets are dedicated to downstream task fine-tuning and performance evaluation.
@@ -35,7 +35,7 @@ You can download the dataset at this [link](https://physionet.org/content/ecg-ar
 The Chapman-Shaoxing-Ningbo consists of 45,152 recordings sampled at 500 Hz from 45,152 patients.  The original dataset includes annotations of 11 common rhythms and 67 cardiovascular conditions, labeled by clinical experts. To ensure label reliability, ECG samples annotated as "unknown" are removed, yielding a cleaned dataset of 23,026 recordings with 38 clinically validated diagnostic labels. 
 
 # :exclamation:Experimental Results
-![](https://github.com/csu-anying/GATE/tree/main/pic/result.png)
+![](https://github.com/csu-anying/GATE/blob/main/pic/result.png)
 
 # :question:How to use
 ## :pencil2:Data Preprocessing
