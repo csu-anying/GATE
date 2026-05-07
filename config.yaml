@@ -1,0 +1,97 @@
+network:
+  ecg_model: Graph_Text
+  num_leads: 12
+  seq_len: 5000
+  patch_size: 500
+  ### this part does not control builder/trainer
+  text_model: Simonlee711/Clinical_ModernBERT
+  free_layers: 6 # set 12 to freeze all layer in bert
+  feature_dim: 768
+
+  projection_head:
+    mlp_hidden_size: 64
+    projection_size: 128
+    time_out_size: 64
+    graph_out_size: 64
+  ###
+
+dataset:
+  dataset_name: 'mimic'
+  data_path: 'your_path/data/mimic-iv-ecg-diagnostic-electrocardiogram-matched-subset-1.0/processed/' # add your image file path here
+
+# params for trainer
+trainer:
+  batch_size:  128
+  val_batch_size: 256
+  checkpoint_interval: 50
+  max_epochs: 10
+  num_workers: 8
+  accum_iter: 10
+
+optimizer:
+  params:
+    lr: 1.0e-3
+    weight_decay: 1.0e-8
+
+# params for zeroshot eval
+zeroshot:
+  prompt_type: 'GATE'
+  prompt_dict: "your_path/LLM/output_descriptions.json"
+  batch_size: 64
+  num_workers: 8
+  meta_data_path: 'your_path/data/'
+  meta_split_path: 'your_path/finetune/data_split/'
+
+  val_sets:
+  ###
+    ptbxl_super_class:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/super_class/ptbxl_super_class_val.csv'
+  ###
+    ptbxl_sub_class:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/sub_class/ptbxl_sub_class_val.csv'
+  ###
+    ptbxl_form:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/form/ptbxl_form_val.csv'
+  ###
+    ptbxl_rhythm:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/rhythm/ptbxl_rhythm_val.csv'
+  ###
+    icbeb:
+      data_path: 'ICBEB/records500'
+      split_path: 'icbeb/icbeb_val.csv'
+  ###
+    chapman:
+      data_path: ''
+      split_path: 'chapman/chapman_val.csv'
+
+  test_sets:
+    ###
+    ptbxl_super_class:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/super_class/ptbxl_super_class_test.csv'
+    ###
+    ptbxl_sub_class:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/sub_class/ptbxl_sub_class_test.csv'
+    ###
+    ptbxl_form:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/form/ptbxl_form_test.csv'
+    ###
+    ptbxl_rhythm:
+      data_path: 'PTB_XL/raw'
+      split_path: 'ptbxl/rhythm/ptbxl_rhythm_test.csv'
+    ###
+    icbeb:
+      data_path: 'ICBEB/records500'
+      split_path: 'icbeb/icbeb_test.csv'
+    ###
+    chapman:
+      data_path: ''
+      split_path: 'chapman/chapman_test.csv'
+# your model name
+wandb_name: 'GATE_100_with_co_Clinical_ModernBERT_node_edge_mask'
